@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>FubuMVC.NLog</id>
+    <version>0.0.0</version>
+    <authors>Jeremy D. Miller</authors>
+    <owners>Jeremy D. Miller</owners>
+    <licenseUrl>https://github.com/DarthFubuMVC/FubuMVC.Loggers/raw/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/DarthFubuMVC/FubuMVC.Loggers</projectUrl>
+    <iconUrl>https://github.com/DarthFubuMVC/fubu-collateral/raw/master/Icons/FubuCore_256.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Drop in integration of NLog into FubuMVC or FubuTransportation apps</description>
+    <tags>utilities, fubu</tags>
+    <dependencies>
+      <dependency id="FubuMVC.Core" version="1.2.0.1596" />
+      <dependency id="NLog" version="2.0.1.2" />
+    </dependencies>
+  </metadata>
+  <files xmlns="">
+    <file src="..\..\src\FubuMVC.NLog\bin\Release\FubuMVC.NLog.*" target="lib" />
+  </files>
+</package>
