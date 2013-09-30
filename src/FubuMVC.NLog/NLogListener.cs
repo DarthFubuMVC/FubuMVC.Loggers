@@ -1,57 +1,65 @@
 ﻿using System;
 using FubuCore;
+using FubuCore.Descriptions;
 using FubuCore.Logging;
+using FubuCore.Util;
+using NLog;
 using Logger = NLog.Logger;
 
 namespace FubuMVC.NLog
 {
     public class NLogListener : ILogListener
     {
-        private readonly Logger _logger;
-        private readonly Func<Type, bool> _filter;
+        private readonly Cache<Type, Logger> _logger;
 
-        public NLogListener(Logger logger, Func<Type, bool> filter)
+        public NLogListener()
         {
-            _logger = logger;
-            _filter = filter;
+            _logger = new Cache<Type, Logger>(x => LogManager.GetLogger(x.FullName));
         }
 
-        public bool ListensFor(Type type)
+        public bool IsDebugEnabled
         {
-            return _filter(type);
+            get { return true; }
         }
 
-        public void DebugMessage(object message)
+        public bool IsInfoEnabled
         {
-            _logger.Debug(message);
-        }
-
-        public void InfoMessage(object message)
-        {
-            _logger.Info(message);
+            get { return true; }
         }
 
         public void Debug(string message)
         {
-            _logger.Debug(message);
+            DebugMessage(message);
         }
 
-        public void Info(string message)
+        public void DebugMessage(object message)
         {
-            _logger.Info(message);
+            _logger[message.GetType()].Debug(Description.For(message));
         }
 
         public void Error(string message, Exception ex)
         {
-            _logger.ErrorException(message, ex);
+            _logger[message.GetType()].ErrorException(message, ex);
         }
 
         public void Error(object correlationId, string message, Exception ex)
         {
-            _logger.ErrorException("Id: {0} / {1}".ToFormat(correlationId, message), ex);
+            Error(message, ex);
         }
 
-        public bool IsDebugEnabled { get { return _logger.IsDebugEnabled; } }
-        public bool IsInfoEnabled { get { return _logger.IsInfoEnabled; } }
+        public void Info(string message)
+        {
+            InfoMessage(message);
+        }
+
+        public void InfoMessage(object message)
+        {
+            _logger[message.GetType()].Info(Description.For(message));
+        }
+
+        public bool ListensFor(Type type)
+        {
+            return true;
+        }
     }
 }

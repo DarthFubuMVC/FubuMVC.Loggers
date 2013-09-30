@@ -21,7 +21,7 @@ namespace FubuMVC.NLog
 
         public void Configure(FubuRegistry registry)
         {
-            registry.Services(x => x.AddService(typeof(ILogListener), ObjectDef.ForValue(new NLogListener(Logger, Filter))));
+            registry.Services(x => x.AddService(typeof(ILogListener), ObjectDef.ForValue(new NLogListener())));
         }
     }
 
