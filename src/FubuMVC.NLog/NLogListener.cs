@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using FubuCore;
 using FubuCore.Descriptions;
 using FubuCore.Logging;
