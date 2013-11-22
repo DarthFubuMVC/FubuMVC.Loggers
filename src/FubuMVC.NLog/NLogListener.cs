@@ -41,7 +41,8 @@ namespace FubuMVC.NLog
 
         public void Error(string message, Exception ex)
         {
-            _logger[message.GetType()].ErrorException(message, ex);
+            var loggerType = ex != null ? ex.GetType() : message.GetType();
+            _logger[loggerType].ErrorException(message, ex);
         }
 
         public void Error(object correlationId, string message, Exception ex)
