@@ -14,6 +14,8 @@ namespace FubuMVC.NLog
     {
         private readonly Cache<Type, Logger> _logger;
 
+        public static bool DebugEnabled = false;
+
         public NLogListener()
         {
             _logger = new Cache<Type, Logger>(x => LogManager.GetLogger(x.FullName));
@@ -21,7 +23,7 @@ namespace FubuMVC.NLog
 
         public bool IsDebugEnabled
         {
-            get { return true; }
+            get { return DebugEnabled; }
         }
 
         public bool IsInfoEnabled

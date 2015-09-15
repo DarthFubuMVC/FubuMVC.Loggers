@@ -20,6 +20,17 @@ namespace FubuMVC.NLog.Testing
                     .ShouldBeTrue();
             }
         }
+
+        [Test]
+        public void debugging_is_disabled_by_default()
+        {
+            using (var runtime = FubuApplication.For<LoggedRegistry>().StructureMap().Bootstrap())
+            {
+                runtime.Factory.GetAll<ILogListener>().OfType<NLogListener>()
+                    .Single()
+                    .IsDebugEnabled.ShouldBeFalse();
+            }
+        }
     }
 
     public class LoggedRegistry : FubuRegistry
